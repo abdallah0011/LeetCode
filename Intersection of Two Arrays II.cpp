@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        multiset<int> st(begin(nums1), end(nums1));
+        vector<int> ans;
+        for(auto &val : nums2){
+            if(st.count(val)){
+                st.extract(val);
+                ans.emplace_back(val);
+            }
+        }
+        return ans;
+    }
+};
+------------------------------------------------------------------------
+class Solution {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        unordered_map<int,int> mp;
+        for(auto &val: nums1) mp[val]++;
+        vector<int> ans;
+        for(auto &val: nums2){
+            if(mp[val]-- > 0) ans.emplace_back(val);
+        }
+        return ans;
+    }
+};
